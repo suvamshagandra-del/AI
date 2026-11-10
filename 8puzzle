@@ -1,42 +1,29 @@
 from collections import deque
-
 def bfs(start, goal):
     q = deque([(start, [])])
     visited = {start}
-
     while q:
         state, path = q.popleft()
-
         if state == goal:
             return path + [state]
-
         z = state.index(0)
         r, c = divmod(z, 3)
-
         for dr, dc in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
             nr, nc = r + dr, c + dc
-
             if 0 <= nr < 3 and 0 <= nc < 3:
                 s = list(state)
                 nz = nr * 3 + nc
                 s[z], s[nz] = s[nz], s[z]
                 s = tuple(s)
-
                 if s not in visited:
                     visited.add(s)
                     q.append((s, path + [state]))
-
     return None
-
-
 print("Enter initial state (use 0 for blank):")
 start = tuple(map(int, input().split()))
-
 print("Enter goal state:")
 goal = tuple(map(int, input().split()))
-
 solution = bfs(start, goal)
-
 if solution:
     print("\nSolution:")
     for s in solution:
