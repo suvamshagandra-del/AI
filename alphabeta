@@ -1,23 +1,17 @@
 def ab(d, i, m, v, a, b):
     if d == 2:
         return v[i]
-
     best = -999 if m else 999
-
     for j in range(2):
         x = ab(d+1, i*2+j, not m, v, a, b)
-
         if m:
             best = max(best, x)
             a = max(a, best)
         else:
             best = min(best, x)
             b = min(b, best)
-
         if a >= b:
             break
-
     return best
-
 v = [3, 5, 6, 9]
 print("Optimal value:", ab(0, 0, True, v, -999, 999))
