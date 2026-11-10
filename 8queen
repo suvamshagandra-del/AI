@@ -3,11 +3,9 @@ def solve(r, q):
         for i in range(8):
             print(" ".join("Q" if q[i] == j else "." for j in range(8)))
         return True
-
     for c in range(8):
         if all(c != x and abs(c-x) != r-i for i, x in enumerate(q)):
             if solve(r+1, q+[c]):
                 return True
     return False
-
 solve(0, [])
